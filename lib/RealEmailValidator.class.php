@@ -4,30 +4,52 @@ class RealEmailValidator
   protected $from = "no-reply@no-mail.com",
             $timeout = 5;
   
-  public function __construct()
-  {
-  }
-  
+  /**
+  * Define the email sending request
+  * @param string $from
+  * @return RealEmailValidator
+  */
   public function setFrom($from)
   {
     $this->from = $from;
+    return $this;
   }
   
+  
+  /**
+  * Get the email sending request
+  * @return string
+  */
   public function getFrom()
   {
     return $this->from;
   }
   
+  /**
+  * Define the timeout time in seconds
+  * @param int $timeout
+  * @return RealEmailValidator
+  */
   public function setTimeout($timeout)
   {
     $this->timeout = $timeout;
+    return $this;
   }
   
+  /**
+  * Get the timeout time in seconds
+  * @return int
+  */
   public function getTimeout()
   {
     return $this->timeout;
   }
   
+  /**
+  * Sends the request to a server for validating
+  * the existance of an email adress
+  * @return boolean true if response was received before timeout
+  */
   public function validate($email)
   {
     if (!preg_match('/([^\@]+)\@(.+)$/', $email, $matches))
